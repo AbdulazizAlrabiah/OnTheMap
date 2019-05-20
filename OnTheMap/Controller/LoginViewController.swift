@@ -16,14 +16,27 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func SignUpPressed(_ sender: Any) {
-        
+        UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up")!, options: [:], completionHandler: nil)
     }
+    
     @IBAction func LogInPressed(_ sender: Any) {
         
+        ActivityIndicator.startAnimating()
+        
+        Requests.Login(username: EmailTextField.text ?? "", password: PasswordTextField.text ?? "", completion: self.handleLoginResponse(flag:))
+    }
+    
+    func handleLoginResponse(flag: Bool) {
+        
+        if flag {
+            //segue
+        } else {
+            //alert
+            //empty fields or invalid
+        }
     }
     
 }
