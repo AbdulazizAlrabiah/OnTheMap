@@ -11,5 +11,20 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
+    override func viewDidLoad() {
+        
+    }
     
+    @IBAction func logoutButton(_ sender: Any) {
+        Requests.Logout()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func refreshButton(_ sender: Any) {
+        
+    }
+    
+    @IBAction func addLocationButton(_ sender: Any) {
+        
+    }
 }

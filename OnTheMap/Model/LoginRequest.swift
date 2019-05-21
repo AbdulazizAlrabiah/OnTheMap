@@ -9,7 +9,6 @@
 import Foundation
 
 struct loginRequest: Codable {
-    
     let udacity: InsideUdacity
 }
 

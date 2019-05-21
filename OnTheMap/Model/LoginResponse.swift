@@ -10,7 +10,6 @@ import Foundation
 
 
 struct LoginResponse: Codable {
-    
     let account: InsideAccount
     let session: InsideSession
     

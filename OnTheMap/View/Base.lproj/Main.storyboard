@@ -162,13 +162,22 @@
                     <navigationItem key="navigationItem" title="On The Map" id="Qkg-EL-iaP">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" style="done" id="091-es-aS7">
                             <color key="tintColor" red="0.12877246740000001" green="0.73119372130000004" blue="0.90262424949999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="LogoutButtorn:" destination="HOD-Rn-69B" id="RFR-N2-ZhS"/>
+                            </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="icon_addpin" landscapeImage="icon_addpin" style="done" id="A3D-3m-Jwr">
                                 <color key="tintColor" red="0.12877246737480164" green="0.73119372129440308" blue="0.90262424945831299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="addLocationButton:" destination="HOD-Rn-69B" id="D5P-k7-SNg"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="icon_refresh" landscapeImage="icon_refresh" style="done" id="Red-rM-NDI">
                                 <color key="tintColor" red="0.15540701150894165" green="0.73922866582870483" blue="0.90241241455078125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="RefreshButton:" destination="HOD-Rn-69B" id="VhW-fc-5hT"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -220,13 +229,22 @@
                     <navigationItem key="navigationItem" title="On The Map" id="x55-qa-TOT">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" style="done" id="Ymq-B2-VUW">
                             <color key="tintColor" red="0.12877246740000001" green="0.73119372130000004" blue="0.90262424949999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="logoutButton:" destination="zql-Qi-3Zb" id="8ga-85-25c"/>
+                            </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="icon_addpin" landscapeImage="icon_addpin" style="done" id="u5y-zw-jrh">
                                 <color key="tintColor" red="0.12877246740000001" green="0.73119372130000004" blue="0.90262424949999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="addLocationButton:" destination="zql-Qi-3Zb" id="Ozh-oH-wch"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="icon_refresh" landscapeImage="icon_refresh" style="done" id="oud-iB-qMT">
                                 <color key="tintColor" red="0.12877246740000001" green="0.73119372130000004" blue="0.90262424949999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="refreshButton:" destination="zql-Qi-3Zb" id="v9X-RY-Txe"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>

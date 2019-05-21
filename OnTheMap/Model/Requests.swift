@@ -15,32 +15,19 @@ class Requests {
         static var key = ""
     }
     
-    class func Login(username: String, password: String, completion: @escaping (Bool) -> Void) {
-        print("handleing")
-        let request = InsideUdacity(username: username, password: password)
-        let user = loginRequest(udacity: request)
-        let body = try! JSONEncoder().encode(user)
-        
-        fetch(url: "https://onthemap-api.udacity.com/v1/session", method: "POST", body: body , completion: { (results: LoginResponse) in
-            DispatchQueue.main.async {
-                completion(true)
-            }
-        })
-        { (error) in
-            
-            print(error)
-        }
+    struct Endpoints {
+        static let UdacityBase = "https://onthemap-api.udacity.com/v1/session"
         
     }
     
-    class func fetch<T: Codable>(url: String, method: String, body: Data?, completion: @escaping ((T) -> Void), errorr: @escaping ((String) -> Void)) {
+    class func request<T: Codable>(url: String, method: String, body: Data?, completion: @escaping ((T) -> Void), errorr: @escaping ((String) -> Void)) {
         
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = method
         
         if method == "GET" {
             // request.url = urlWith(url: url)
-        } else {
+        } else if method == "POST" {
             request.httpBody = body
         }
         request.allHTTPHeaderFields = headers(method: method)
@@ -71,7 +58,9 @@ class Requests {
                 let range = Range(5..<data.count)
                 let newData = data.subdata(in: range)
                 let object = try JSONDecoder().decode(T.self, from: newData)
-                completion(object)
+                DispatchQueue.main.async {
+                    completion(object)
+                }
             } catch {
                 // handle error
                 print(error)
@@ -97,6 +86,32 @@ class Requests {
             }
         }
         return headers
+    }
+    
+    class func Login(username: String, password: String, completion: @escaping (Bool) -> Void) {
+        print("handleing")
+        let account = InsideUdacity(username: username, password: password)
+        let data = loginRequest(udacity: account)
+        let body = try! JSONEncoder().encode(data)
+        
+        request(url: Endpoints.UdacityBase, method: "POST", body: body , completion: { (results: LoginResponse) in
+            
+                print(results)
+                completion(true)
+        })
+        { (error) in
+            print(error)
+        }
+    }
+    
+    class func Logout() {
+        
+        request(url: Endpoints.UdacityBase, method: "DELETE", body: nil, completion: { (results: LogoutResponse) in
+
+                print(results)
+        }) { (error) in
+            print(error)
+        }
     }
 }
 

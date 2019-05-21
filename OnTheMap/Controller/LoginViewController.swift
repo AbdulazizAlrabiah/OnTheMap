@@ -18,6 +18,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ActivityIndicator.stopAnimating()
+    }
+    
     @IBAction func SignUpPressed(_ sender: Any) {
         UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up")!, options: [:], completionHandler: nil)
     }
