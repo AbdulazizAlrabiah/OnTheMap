@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(flag: Bool) {
         
         if flag {
-            //segue
+            performSegue(withIdentifier: "LoginSuccessfull", sender: nil)
         } else {
             //alert
             //empty fields or invalid
