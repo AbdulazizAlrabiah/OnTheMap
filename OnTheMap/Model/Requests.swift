@@ -17,7 +17,11 @@ class Requests {
     
     struct Endpoints {
         static let UdacityBase = "https://onthemap-api.udacity.com/v1/session"
+        static let ParseBase = "https://onthemap-api.udacity.com/v1/StudentLocation"
         
+        static func getLocationUrl(limit: Int = 100) -> String {
+            return ParseBase + "?limit=\(limit)"
+        }
     }
     
     class func request<T: Codable>(url: String, method: String, body: Data?, completion: @escaping ((T) -> Void), errorr: @escaping ((String) -> Void)) {
@@ -44,6 +48,11 @@ class Requests {
             }
             guard response.statusCode >= 200 && response.statusCode < 400 else {
                 // handle server error
+                // change how to handle the error!
+                let range = Range(5..<data!.count)
+                let newData = data?.subdata(in: range) /* subset response data! */
+                let object = try! JSONDecoder().decode(ErrorResponse.self, from: newData!)
+                print(object)
                 print("error3")
                 return
             }
@@ -55,17 +64,30 @@ class Requests {
             // handle data
             do {
                 print("hi")
-                let range = Range(5..<data.count)
-                let newData = data.subdata(in: range)
+                var newData = data
+                if url == Endpoints.UdacityBase {
+                    let range = Range(5..<data.count)
+                    newData = data.subdata(in: range)
+                }
                 let object = try JSONDecoder().decode(T.self, from: newData)
+                
                 DispatchQueue.main.async {
                     completion(object)
                 }
             } catch {
+                
+                do {
+                    //change
+                    let range = Range(5..<data.count)
+                    let newData = data.subdata(in: range) /* subset response data! */
+                    print(String(data: newData, encoding: .utf8)!)
+                } catch {
+                    //handle error
+                    
+                }
                 // handle error
                 print(error)
             }
-            
             }.resume()
     }
     
@@ -96,8 +118,8 @@ class Requests {
         
         request(url: Endpoints.UdacityBase, method: "POST", body: body , completion: { (results: LoginResponse) in
             
-                print(results)
-                completion(true)
+            print(results)
+            completion(true)
         })
         { (error) in
             print(error)
@@ -107,12 +129,24 @@ class Requests {
     class func Logout() {
         
         request(url: Endpoints.UdacityBase, method: "DELETE", body: nil, completion: { (results: LogoutResponse) in
-
-                print(results)
+            
+            print(results)
         }) { (error) in
             print(error)
         }
     }
+    
+    class func getStudentsLocation(completion: @escaping (LocationResponse) -> Void) {
+        
+        request(url: Endpoints.getLocationUrl(), method: "GET", body: nil, completion: { (results: LocationResponse) in
+            print(results)
+            completion(results)
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    
 }
 
 
