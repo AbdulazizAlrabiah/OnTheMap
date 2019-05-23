@@ -6,7 +6,6 @@
 //  Copyright © 2019 Aziz. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class TableViewController: UITableViewController  {
@@ -44,6 +43,7 @@ class TableViewController: UITableViewController  {
         let student = studentLocations[indexPath.row]
         
         cell.textLabel?.text = (student.firstName + student.lastName)
+        cell.imageView?.image = UIImage(named: "icon_pin")
         //maybe
         cell.detailTextLabel?.text = student.mediaURL!
         //

@@ -275,17 +275,16 @@
             </objects>
             <point key="canvasLocation" x="3297" y="581"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Location View Controller-->
         <scene sceneID="22A-Cq-6Kg">
             <objects>
-                <viewController id="d5E-4U-riT" sceneMemberID="viewController">
+                <viewController id="d5E-4U-riT" customClass="AddLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="niw-jc-Ple">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="qPw-eq-mhz">
-                                <rect key="frame" x="67" y="82" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="qPw-eq-mhz">
+                                <rect key="frame" x="161.5" y="90" width="52" height="67"/>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Xz-Oo-aF9">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -297,19 +296,108 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0wP-Jd-fpd">
+                                <rect key="frame" x="16" y="214" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter website" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E3w-fd-KYe">
+                                <rect key="frame" x="16" y="252" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5D-7x-ONt">
+                                <rect key="frame" x="16" y="290" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.12877246740000001" green="0.73119372130000004" blue="0.90262424949999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="FIND LOCATION">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="findLocationButton:" destination="d5E-4U-riT" eventType="touchUpInside" id="WBb-Zw-gpi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="E3w-fd-KYe" firstAttribute="centerX" secondItem="niw-jc-Ple" secondAttribute="centerX" id="1aa-HW-plO"/>
+                            <constraint firstItem="qPw-eq-mhz" firstAttribute="centerX" secondItem="niw-jc-Ple" secondAttribute="centerX" id="4Wq-IV-Nyj"/>
+                            <constraint firstItem="d5D-7x-ONt" firstAttribute="leading" secondItem="TLf-3d-WW8" secondAttribute="leading" constant="16" id="JBz-ZQ-R0c"/>
+                            <constraint firstItem="0wP-Jd-fpd" firstAttribute="top" secondItem="qPw-eq-mhz" secondAttribute="bottom" constant="57" id="Ofc-Fg-xX2"/>
+                            <constraint firstItem="qPw-eq-mhz" firstAttribute="top" secondItem="4Xz-Oo-aF9" secondAttribute="bottom" constant="26" id="aZB-po-BiC"/>
+                            <constraint firstItem="E3w-fd-KYe" firstAttribute="leading" secondItem="TLf-3d-WW8" secondAttribute="leading" constant="16" id="c4E-H8-QCR"/>
+                            <constraint firstItem="d5D-7x-ONt" firstAttribute="top" secondItem="E3w-fd-KYe" secondAttribute="bottom" constant="8" id="grF-sK-wMC"/>
                             <constraint firstItem="4Xz-Oo-aF9" firstAttribute="top" secondItem="TLf-3d-WW8" secondAttribute="top" id="o2m-cF-7yn"/>
                             <constraint firstItem="4Xz-Oo-aF9" firstAttribute="leading" secondItem="TLf-3d-WW8" secondAttribute="leading" id="p2M-Uh-AcW"/>
+                            <constraint firstItem="0wP-Jd-fpd" firstAttribute="leading" secondItem="TLf-3d-WW8" secondAttribute="leading" constant="16" id="qkV-7K-9jc"/>
                             <constraint firstItem="4Xz-Oo-aF9" firstAttribute="trailing" secondItem="TLf-3d-WW8" secondAttribute="trailing" id="sNJ-dw-t1W"/>
+                            <constraint firstItem="E3w-fd-KYe" firstAttribute="top" secondItem="0wP-Jd-fpd" secondAttribute="bottom" constant="8" id="uXX-QQ-ZYn"/>
+                            <constraint firstItem="0wP-Jd-fpd" firstAttribute="centerX" secondItem="niw-jc-Ple" secondAttribute="centerX" id="wLj-Eu-HXW"/>
+                            <constraint firstItem="d5D-7x-ONt" firstAttribute="centerX" secondItem="niw-jc-Ple" secondAttribute="centerX" id="yoL-nB-wR6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TLf-3d-WW8"/>
                     </view>
+                    <connections>
+                        <outlet property="locationTextField" destination="0wP-Jd-fpd" id="AJw-G7-JqH"/>
+                        <outlet property="websiteTextField" destination="E3w-fd-KYe" id="DaE-Kb-VUL"/>
+                        <segue destination="AN1-WQ-EJA" kind="show" id="ZaE-0e-059"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7j-MY-ydQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4547" y="204"/>
+            <point key="canvasLocation" x="4546.3999999999996" y="203.74812593703149"/>
+        </scene>
+        <!--Add Location Map View Controller-->
+        <scene sceneID="SqX-Sk-CwO">
+            <objects>
+                <viewController id="AN1-WQ-EJA" customClass="AddLocationMapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lYL-ct-SBo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MMn-yK-DzT">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Add Location" id="4gG-L6-3lO"/>
+                                </items>
+                            </navigationBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="y9u-Ja-Kco">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwV-vN-9Zl">
+                                <rect key="frame" x="16" y="617" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.12877246740000001" green="0.73119372130000004" blue="0.90262424949999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="FINISH">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="postLocationButton:" destination="AN1-WQ-EJA" eventType="touchUpInside" id="4e4-dT-FLv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="y9u-Ja-Kco" firstAttribute="top" secondItem="MMn-yK-DzT" secondAttribute="bottom" id="0jh-7G-pSM"/>
+                            <constraint firstItem="zW3-Zl-DaM" firstAttribute="trailing" secondItem="jwV-vN-9Zl" secondAttribute="trailing" constant="16" id="1gn-of-UWG"/>
+                            <constraint firstItem="y9u-Ja-Kco" firstAttribute="leading" secondItem="zW3-Zl-DaM" secondAttribute="leading" id="1yi-o2-u2d"/>
+                            <constraint firstItem="zW3-Zl-DaM" firstAttribute="bottom" secondItem="y9u-Ja-Kco" secondAttribute="bottom" id="3oq-q2-4hZ"/>
+                            <constraint firstItem="jwV-vN-9Zl" firstAttribute="leading" secondItem="zW3-Zl-DaM" secondAttribute="leading" constant="16" id="B6F-Lt-CWG"/>
+                            <constraint firstItem="MMn-yK-DzT" firstAttribute="leading" secondItem="zW3-Zl-DaM" secondAttribute="leading" id="GCA-mm-qEe"/>
+                            <constraint firstItem="MMn-yK-DzT" firstAttribute="trailing" secondItem="zW3-Zl-DaM" secondAttribute="trailing" id="KUx-FL-6oC"/>
+                            <constraint firstItem="zW3-Zl-DaM" firstAttribute="trailing" secondItem="y9u-Ja-Kco" secondAttribute="trailing" id="Uxv-RD-zWC"/>
+                            <constraint firstItem="zW3-Zl-DaM" firstAttribute="bottom" secondItem="jwV-vN-9Zl" secondAttribute="bottom" constant="20" id="XcM-5H-0Xu"/>
+                            <constraint firstItem="MMn-yK-DzT" firstAttribute="top" secondItem="zW3-Zl-DaM" secondAttribute="top" id="cm4-uo-ivK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zW3-Zl-DaM"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="y9u-Ja-Kco" id="arc-KP-HHm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9lg-LV-JYY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5456.8000000000002" y="203.74812593703149"/>
         </scene>
     </scenes>
     <resources>
