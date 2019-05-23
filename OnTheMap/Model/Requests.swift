@@ -19,8 +19,8 @@ class Requests {
         static let UdacityBase = "https://onthemap-api.udacity.com/v1/session"
         static let ParseBase = "https://onthemap-api.udacity.com/v1/StudentLocation"
         
-        static func getLocationUrl(limit: Int = 100) -> String {
-            return ParseBase + "?limit=\(limit)"
+        static func getLocationUrl(limit: Int = 100, order: String = "-updatedAt") -> String {
+            return ParseBase + "?order=\(order)" + "&limit=\(limit)"
         }
     }
     
@@ -49,10 +49,11 @@ class Requests {
             guard response.statusCode >= 200 && response.statusCode < 400 else {
                 // handle server error
                 // change how to handle the error!
-                let range = Range(5..<data!.count)
-                let newData = data?.subdata(in: range) /* subset response data! */
-                let object = try! JSONDecoder().decode(ErrorResponse.self, from: newData!)
-                print(object)
+                print(String(data: data!, encoding: .utf8)!)
+//                let range = Range(5..<data!.count)
+//                let newData = data?.subdata(in: range) /* subset response data! */
+//                let object = try! JSONDecoder().decode(ErrorResponse.self, from: newData!)
+//                print(object)
                 print("error3")
                 return
             }

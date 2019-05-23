@@ -9,10 +9,14 @@
 import Foundation
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController  {
+    
+    var studentLocations: [StudentLocation] = []
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
+        getLocation()
     }
     
     @IBAction func logoutButton(_ sender: Any) {
@@ -22,9 +26,43 @@ class TableViewController: UITableViewController {
     
     @IBAction func refreshButton(_ sender: Any) {
         
+        getLocation()
     }
     
     @IBAction func addLocationButton(_ sender: Any) {
         
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return studentLocations.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInfo")!
+        let student = studentLocations[indexPath.row]
+        
+        cell.textLabel?.text = (student.firstName + student.lastName)
+        //maybe
+        cell.detailTextLabel?.text = student.mediaURL!
+        //
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let app = UIApplication.shared
+        if let toOpen = studentLocations[indexPath.row].mediaURL {
+            app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func getLocation() {
+        
+        Requests.getStudentsLocation { (location) in
+            self.studentLocations = location.results!
+            self.tableView.reloadData()
+        }
     }
 }

@@ -12,7 +12,7 @@ struct StudentLocation: Codable {
     let createdAt: String
     let updatedAt: String
     var mapString: String?
-    var mediaURL: String
+    var mediaURL: String?
     var firstName: String
     var lastName: String
     var uniqueKey: String?
