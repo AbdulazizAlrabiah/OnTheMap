@@ -34,6 +34,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func addLocationButton(_ sender: Any) {
         
+        let addLocationVC = self.storyboard!.instantiateViewController(withIdentifier: "AddLocation") as! UINavigationController
+        
+        present(addLocationVC, animated: true, completion: nil)
     }
     
     func fillAnotationArray(){

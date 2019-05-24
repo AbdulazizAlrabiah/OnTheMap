@@ -30,6 +30,9 @@ class TableViewController: UITableViewController  {
     
     @IBAction func addLocationButton(_ sender: Any) {
         
+        let addLocationVC = self.storyboard!.instantiateViewController(withIdentifier: "AddLocation") as! UINavigationController
+        
+        present(addLocationVC, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

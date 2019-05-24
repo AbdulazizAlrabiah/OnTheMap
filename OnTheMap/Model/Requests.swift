@@ -10,17 +10,22 @@ import Foundation
 
 class Requests {
     
-    struct account {
-        static var id = ""
-        static var key = ""
+    struct user {
+        static var userId = ""
+        static var sessionId = ""
     }
     
     struct Endpoints {
         static let UdacityBase = "https://onthemap-api.udacity.com/v1/session"
         static let ParseBase = "https://onthemap-api.udacity.com/v1/StudentLocation"
+        static let UserInfo = "https://onthemap-api.udacity.com/v1/users/"
         
-        static func getLocationUrl(limit: Int = 100, order: String = "-updatedAt") -> String {
+        static func locationURL(limit: Int = 100, order: String = "-updatedAt") -> String {
             return ParseBase + "?order=\(order)" + "&limit=\(limit)"
+        }
+        
+        static func studentInfo(Id: String = user.userId) -> String{
+            return UserInfo + Id
         }
     }
     
@@ -66,7 +71,7 @@ class Requests {
             do {
                 print("hi")
                 var newData = data
-                if url == Endpoints.UdacityBase {
+                if url == Endpoints.UdacityBase || url == Endpoints.studentInfo() {
                     let range = Range(5..<data.count)
                     newData = data.subdata(in: range)
                 }
@@ -79,9 +84,9 @@ class Requests {
                 
                 do {
                     //change
-                    let range = Range(5..<data.count)
-                    let newData = data.subdata(in: range) /* subset response data! */
-                    print(String(data: newData, encoding: .utf8)!)
+//                    let range = Range(5..<data.count)
+//                    let newData = data.subdata(in: range) /* subset response data! */
+                    print(String(data: data, encoding: .utf8)!)
                 } catch {
                     //handle error
                     
@@ -119,6 +124,8 @@ class Requests {
         
         request(url: Endpoints.UdacityBase, method: "POST", body: body , completion: { (results: LoginResponse) in
             
+            user.userId = results.account.key
+            user.sessionId = results.session.id
             print(results)
             completion(true)
         })
@@ -139,15 +146,23 @@ class Requests {
     
     class func getStudentsLocation(completion: @escaping (LocationResponse) -> Void) {
         
-        request(url: Endpoints.getLocationUrl(), method: "GET", body: nil, completion: { (results: LocationResponse) in
-            print(results)
+        request(url: Endpoints.locationURL(), method: "GET", body: nil, completion: { (results: LocationResponse) in
+            //print(results)
             completion(results)
         }) { (error) in
             print(error)
         }
     }
     
-    
+    class func getStudentName(completion: @escaping (UserInfoResponse) -> Void) {
+        
+        request(url: Endpoints.studentInfo(), method: "GET", body: nil, completion: { (results: UserInfoResponse) in
+            print(results)
+            completion(results)
+        }) { (error) in
+            
+        }
+    }
 }
 
 
