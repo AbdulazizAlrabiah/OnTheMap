@@ -35,16 +35,17 @@ class LoginViewController: UIViewController {
         if checkEmpty() {
             alertFailure(message: "Empty email or password")
         } else {
-            Requests.Login(username: EmailTextField.text!, password: PasswordTextField.text!, completion: self.handleLoginResponse(flag:))
+            Requests.Login(username: EmailTextField.text!, password: PasswordTextField.text!, completion: self.handleLoginResponse(flag:error:))
         }
     }
     
-    func handleLoginResponse(flag: Bool) {
+    func handleLoginResponse(flag: Bool, error: String?) {
         
         if flag {
             performSegue(withIdentifier: "LoginSuccessfull", sender: nil)
         } else {
-            alertFailure(message: "Invalid email or password")
+            
+            alertFailure(message: error!)
         }
     }
     

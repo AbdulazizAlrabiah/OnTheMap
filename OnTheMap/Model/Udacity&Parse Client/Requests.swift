@@ -43,12 +43,17 @@ class Requests {
         request.allHTTPHeaderFields = headers(method: method)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
-                errorr("error")
+                DispatchQueue.main.async {
+                    errorr("Check connection")
+                }
                 print("error1")
                 return
             }
             guard let response = response as? HTTPURLResponse else {
                 // handle error
+                DispatchQueue.main.async {
+                    errorr("error")
+                }
                 print("error2")
                 return
             }
@@ -68,6 +73,9 @@ class Requests {
             }
             guard let data = data else {
                 // handle no data
+                DispatchQueue.main.async {
+                    errorr("error")
+                }
                 print("error4")
                 return
             }
@@ -120,7 +128,7 @@ class Requests {
         return headers
     }
     
-    class func Login(username: String, password: String, completion: @escaping (Bool) -> Void) {
+    class func Login(username: String, password: String, completion: @escaping (Bool, String?) -> Void) {
         print("handleing")
         let account = InsideUdacity(username: username, password: password)
         let data = loginRequest(udacity: account)
@@ -131,10 +139,10 @@ class Requests {
             user.userId = results.account.key
             user.sessionId = results.session.id
             print(results)
-            completion(true)
+            completion(true, nil)
         })
         { (error) in
-            completion(false)
+            completion(false, error)
             print(error)
         }
     }
@@ -178,6 +186,7 @@ class Requests {
             user.objectId = results.objectId
             completion(results)
         }) { (error) in
+            
             print(error)
         }
     }
