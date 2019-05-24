@@ -58,9 +58,18 @@ class AddLocationMapViewController: UIViewController, MKMapViewDelegate {
         
         let post = PostStudentLocationRequest.init(mapString: student.mapString, mediaURL: student.mediaURL, firstName: student.firstName, lastName: student.lastName, uniqueKey: student.uniqueKey, latitude: student.latitude, longitude: student.longitude)
         
-        Requests.postStudentLocation(student: post) { (response) in
+        Requests.postStudentLocation(student: post, completion: { (response) in
             self.dismiss(animated: true, completion: nil)
+        }) { (error) in
+            self.alertFailure(message: error)
         }
+    }
+    
+    func alertFailure(message: String) {
+        
+        let alertVC = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        showDetailViewController(alertVC, sender: nil)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

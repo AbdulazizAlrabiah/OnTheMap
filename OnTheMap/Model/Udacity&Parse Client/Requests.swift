@@ -25,10 +25,11 @@ class Requests {
             return ParseBase + "?order=\(order)" + "&limit=\(limit)"
         }
         
-        static func studentInfo(Id: String = user.userId) -> String{
+        static func studentInfo(Id: String = user.userId) -> String {
             return UserInfo + Id
         }
     }
+    
     
     class func request<T: Codable>(url: String, method: String, body: Data?, completion: @escaping ((T) -> Void), errorr: @escaping ((String) -> Void)) {
         
@@ -44,45 +45,40 @@ class Requests {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
                 DispatchQueue.main.async {
-                    errorr("Check connection")
+                    errorr(StatusCodes.StatusCodes.connection.rawValue)
                 }
-                print("error1")
                 return
             }
             guard let response = response as? HTTPURLResponse else {
-                // handle error
                 DispatchQueue.main.async {
-                    errorr("error")
+                    errorr(StatusCodes.StatusCodes.connection.rawValue)
                 }
-                print("error2")
-                return
-            }
-            guard response.statusCode >= 200 && response.statusCode < 400 else {
-                // handle server error
-                // change how to handle the error!
-                print(String(data: data!, encoding: .utf8)!)
-//                let range = Range(5..<data!.count)
-//                let newData = data?.subdata(in: range) /* subset response data! */
-//                let object = try! JSONDecoder().decode(ErrorResponse.self, from: newData!)
-//                print(object)
-                DispatchQueue.main.async {
-                    errorr("error")
-                }
-                print("error3")
                 return
             }
             guard let data = data else {
-                // handle no data
                 DispatchQueue.main.async {
-                    errorr("error")
+                    errorr(StatusCodes.StatusCodes.connection.rawValue)
                 }
-                print("error4")
                 return
             }
-            // handle data
+            guard response.statusCode >= 200 && response.statusCode < 400 else {
+                
+                print(String(data: data, encoding: .utf8)!)
+                do {
+                    let range = Range(5..<data.count)
+                    let newData = data.subdata(in: range) /* subset response data! */
+                    let object = try JSONDecoder().decode(ErrorResponse.self, from: newData)
+                    DispatchQueue.main.async {
+                        errorr(StatusCodes().handleErrors(status: object.status))
+                    }
+                } catch {
+                   // errorr()
+                }
+                return
+            }
             do {
-                print("hi")
                 var newData = data
+                //Check if the url from udacity then skip the first 5 letters
                 if url == Endpoints.UdacityBase || url == Endpoints.studentInfo() {
                     let range = Range(5..<data.count)
                     newData = data.subdata(in: range)
@@ -94,19 +90,9 @@ class Requests {
                 }
             } catch {
                 
-                do {
-                    //change
-//                    let range = Range(5..<data.count)
-//                    let newData = data.subdata(in: range) /* subset response data! */
-                    print(String(data: data, encoding: .utf8)!)
-                } catch {
-                    //handle error
-                    
-                }
-                // handle error
-                print(error)
+                
             }
-            }.resume()
+        }.resume()
     }
     
     class func headers(method: String) -> [String: String] {
@@ -157,47 +143,37 @@ class Requests {
         }
     }
     
-    class func getStudentsLocation(completion: @escaping (LocationResponse) -> Void) {
+    class func getStudentsLocation(completion: @escaping (LocationResponse) -> Void, err: @escaping (String) -> Void) {
         
         request(url: Endpoints.locationURL(), method: "GET", body: nil, completion: { (results: LocationResponse) in
-            //print(results)
             completion(results)
         }) { (error) in
+            err(error)
             print(error)
         }
     }
     
-    class func getStudentName(completion: @escaping (UserInfoResponse) -> Void) {
+    class func getStudentName(completion: @escaping (UserInfoResponse) -> Void, err: @escaping (String) -> Void) {
         
         request(url: Endpoints.studentInfo(), method: "GET", body: nil, completion: { (results: UserInfoResponse) in
             print(results)
             completion(results)
         }) { (error) in
-            print(error)
+            err(error)
         }
     }
     
-    class func postStudentLocation(student: PostStudentLocationRequest, completion: @escaping (PostStudentLocationResponse) -> Void) {
+    class func postStudentLocation(student: PostStudentLocationRequest, completion: @escaping (PostStudentLocationResponse) -> Void, err: @escaping (String) -> Void) {
         
         let body = try! JSONEncoder().encode(student)
         
         request(url: Endpoints.ParseBase, method: "POST", body: body, completion: { (results: PostStudentLocationResponse) in
+            
             print(results)
             user.objectId = results.objectId
             completion(results)
         }) { (error) in
-            
-            print(error)
+            err(error)
         }
     }
 }
-
-
-//        let body2 = "{\"udacity\": {\"username\": \"\(request.username)\", \"password\": \"\(request.password)\"}}".data(using: .utf8)
-//        let body = """
-//        {"udacity":
-//        {"username": "\(request.username)",
-//        "password": "\(request.password)"
-//        }
-//        }
-//        """.data(using: .utf8)

@@ -47,9 +47,8 @@ class TableViewController: UITableViewController  {
         
         cell.textLabel?.text = (student.firstName + student.lastName)
         cell.imageView?.image = UIImage(named: "icon_pin")
-        //maybe
         cell.detailTextLabel?.text = student.mediaURL!
-        //
+        
         return cell
     }
     
@@ -63,9 +62,18 @@ class TableViewController: UITableViewController  {
     
     func getLocation() {
         
-        Requests.getStudentsLocation { (location) in
+        Requests.getStudentsLocation(completion: { (location) in
             self.studentLocations = location.results!
             self.tableView.reloadData()
+        }) { (error) in
+            self.alertFailure(error: error)
         }
+    }
+    
+    func alertFailure(error: String) {
+        
+         let alertVC = UIAlertController(title: nil, message: error, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }

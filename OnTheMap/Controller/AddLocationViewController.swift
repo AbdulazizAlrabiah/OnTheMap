@@ -23,25 +23,36 @@ class AddLocationViewController: UIViewController {
     @IBAction func findLocationButton(_ sender: Any) {
         
         activityIndicator.startAnimating()
-        
-        let location = MKLocalSearch.Request()
-        location.naturalLanguageQuery = locationTextField.text
-        let request = MKLocalSearch(request: location)
-        
-        request.start { (response, error) in
-            guard let response = response else { return }
-            let lat = response.boundingRegion.center.latitude as Double
-            let long = response.boundingRegion.center.longitude as Double
-            self.getStudentInfo(lat: lat, long: long)
+
+        if checkEmpty() {
+            alertFailure(message: "Empty location field or website field")
+        } else if (websiteTextField.text?.starts(with: ("https://")))! == false {
+            alertFailure(message: "Enter a website that begins with https://")
+        }
+        else {
+            let location = MKLocalSearch.Request()
+            location.naturalLanguageQuery = locationTextField.text
+            let request = MKLocalSearch(request: location)
+            
+            request.start { (response, error) in
+                guard let response = response else {
+                    self.alertFailure(message: "Enter a valid location address")
+                    return }
+                let lat = response.boundingRegion.center.latitude as Double
+                let long = response.boundingRegion.center.longitude as Double
+                self.getStudentInfo(lat: lat, long: long)
+            }
         }
     }
     
     func getStudentInfo(lat: Double, long: Double) {
         
-        Requests.getStudentName { (student) in
-          let info = StudentLocation(createdAt: "", updatedAt: "", mapString: self.locationTextField.text, mediaURL: self.websiteTextField.text, firstName: student.firstName , lastName: student.lastName, uniqueKey: Requests.user.userId, latitude: lat, longitude: long)
+        Requests.getStudentName(completion: { (student) in
+            let info = StudentLocation(createdAt: "", updatedAt: "", mapString: self.locationTextField.text, mediaURL: self.websiteTextField.text, firstName: student.firstName , lastName: student.lastName, uniqueKey: Requests.user.userId, latitude: lat, longitude: long)
             
             self.fillInfoAndPass(student: info)
+        }) { (error) in
+            self.alertFailure(message: error)
         }
     }
     
@@ -53,5 +64,21 @@ class AddLocationViewController: UIViewController {
         self.navigationController?.pushViewController(mapVC, animated: true)
         
         activityIndicator.stopAnimating()
+    }
+    
+    func checkEmpty() -> Bool {
+        
+        if locationTextField.text == "" || websiteTextField.text == "" {
+            return true
+        }
+        return false
+    }
+    
+    func alertFailure(message: String) {
+
+        activityIndicator.stopAnimating()
+        let alertVC = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        showDetailViewController(alertVC, sender: nil)
     }
 }

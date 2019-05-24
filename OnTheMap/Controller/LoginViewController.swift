@@ -62,6 +62,7 @@ class LoginViewController: UIViewController {
         ActivityIndicator.stopAnimating()
         let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (alert) in
+            
         }))
         show(alertVC, sender: nil)
     }

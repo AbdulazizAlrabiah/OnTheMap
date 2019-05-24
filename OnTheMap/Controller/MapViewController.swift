@@ -92,9 +92,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func getLocation() {
         
-        Requests.getStudentsLocation { (location) in
+        Requests.getStudentsLocation(completion: { (location) in
             self.studentLocations = location.results!
             self.fillAnotationArray()
+        }) { (error) in
+            self.alertFailure(error: error)
         }
+    }
+    
+    func alertFailure(error: String) {
+        
+        let alertVC = UIAlertController(title: nil, message: error, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }
