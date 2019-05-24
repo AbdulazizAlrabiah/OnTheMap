@@ -19,7 +19,8 @@
 		8F08430D2296352F00B3B194 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08430C2296352F00B3B194 /* AddLocationViewController.swift */; };
 		8F08430F2296358000B3B194 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F08430E2296358000B3B194 /* AddLocationMapViewController.swift */; };
 		8F0843112297638B00B3B194 /* UserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0843102297638B00B3B194 /* UserInfoResponse.swift */; };
-		8F084313229768A100B3B194 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F084312229768A100B3B194 /* User.swift */; };
+		8F0843152298381D00B3B194 /* PostStudentLocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0843142298381D00B3B194 /* PostStudentLocationRequest.swift */; };
+		8F084317229838F000B3B194 /* PostStudentLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F084316229838F000B3B194 /* PostStudentLocationResponse.swift */; };
 		8F39646622916A45004DA2CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F39646522916A45004DA2CF /* AppDelegate.swift */; };
 		8F39646822916A45004DA2CF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F39646722916A45004DA2CF /* LoginViewController.swift */; };
 		8F39646B22916A45004DA2CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F39646922916A45004DA2CF /* Main.storyboard */; };
@@ -40,7 +41,8 @@
 		8F08430C2296352F00B3B194 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		8F08430E2296358000B3B194 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
 		8F0843102297638B00B3B194 /* UserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoResponse.swift; sourceTree = "<group>"; };
-		8F084312229768A100B3B194 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8F0843142298381D00B3B194 /* PostStudentLocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStudentLocationRequest.swift; sourceTree = "<group>"; };
+		8F084316229838F000B3B194 /* PostStudentLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStudentLocationResponse.swift; sourceTree = "<group>"; };
 		8F39646222916A45004DA2CF /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F39646522916A45004DA2CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F39646722916A45004DA2CF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F084318229840F700B3B194 /* Udacity&Parse Client */ = {
+			isa = PBXGroup;
+			children = (
+				8F0842FA2292DCE000B3B194 /* Requests.swift */,
+			);
+			path = "Udacity&Parse Client";
+			sourceTree = "<group>";
+		};
+		8F0843192298411B00B3B194 /* Requests Structs */ = {
+			isa = PBXGroup;
+			children = (
+				8F0842FC2292E72200B3B194 /* LoginRequest.swift */,
+				8F0843142298381D00B3B194 /* PostStudentLocationRequest.swift */,
+				8F084308229586EB00B3B194 /* StudentLocation.swift */,
+			);
+			path = "Requests Structs";
+			sourceTree = "<group>";
+		};
+		8F08431A2298414500B3B194 /* Response Structs */ = {
+			isa = PBXGroup;
+			children = (
+				8F0842FE2292E74300B3B194 /* LoginResponse.swift */,
+				8F08430422944D4E00B3B194 /* LogoutResponse.swift */,
+				8F084306229580B300B3B194 /* ErrorResponse.swift */,
+				8F08430A2295874F00B3B194 /* LocationResponse.swift */,
+				8F0843102297638B00B3B194 /* UserInfoResponse.swift */,
+				8F084316229838F000B3B194 /* PostStudentLocationResponse.swift */,
+			);
+			path = "Response Structs";
+			sourceTree = "<group>";
+		};
 		8F39645922916A45004DA2CF = {
 			isa = PBXGroup;
 			children = (
@@ -92,15 +125,9 @@
 		8F8912B92292350F00709516 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8F0842FA2292DCE000B3B194 /* Requests.swift */,
-				8F0842FC2292E72200B3B194 /* LoginRequest.swift */,
-				8F0842FE2292E74300B3B194 /* LoginResponse.swift */,
-				8F08430422944D4E00B3B194 /* LogoutResponse.swift */,
-				8F084306229580B300B3B194 /* ErrorResponse.swift */,
-				8F084308229586EB00B3B194 /* StudentLocation.swift */,
-				8F08430A2295874F00B3B194 /* LocationResponse.swift */,
-				8F0843102297638B00B3B194 /* UserInfoResponse.swift */,
-				8F084312229768A100B3B194 /* User.swift */,
+				8F084318229840F700B3B194 /* Udacity&Parse Client */,
+				8F0843192298411B00B3B194 /* Requests Structs */,
+				8F08431A2298414500B3B194 /* Response Structs */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,15 +236,16 @@
 				8F08430522944D4E00B3B194 /* LogoutResponse.swift in Sources */,
 				8F0842FB2292DCE000B3B194 /* Requests.swift in Sources */,
 				8F0843032293883900B3B194 /* TableViewController.swift in Sources */,
+				8F084317229838F000B3B194 /* PostStudentLocationResponse.swift in Sources */,
 				8F08430B2295874F00B3B194 /* LocationResponse.swift in Sources */,
 				8F0843012293865100B3B194 /* MapViewController.swift in Sources */,
 				8F39646822916A45004DA2CF /* LoginViewController.swift in Sources */,
 				8F39646622916A45004DA2CF /* AppDelegate.swift in Sources */,
 				8F0843112297638B00B3B194 /* UserInfoResponse.swift in Sources */,
-				8F084313229768A100B3B194 /* User.swift in Sources */,
 				8F08430D2296352F00B3B194 /* AddLocationViewController.swift in Sources */,
 				8F08430F2296358000B3B194 /* AddLocationMapViewController.swift in Sources */,
 				8F084307229580B300B3B194 /* ErrorResponse.swift in Sources */,
+				8F0843152298381D00B3B194 /* PostStudentLocationRequest.swift in Sources */,
 				8F0842FD2292E72200B3B194 /* LoginRequest.swift in Sources */,
 				8F084309229586EB00B3B194 /* StudentLocation.swift in Sources */,
 				8F0842FF2292E74300B3B194 /* LoginResponse.swift in Sources */,

@@ -32,7 +32,11 @@ class LoginViewController: UIViewController {
         
         ActivityIndicator.startAnimating()
         
-        Requests.Login(username: EmailTextField.text ?? "", password: PasswordTextField.text ?? "", completion: self.handleLoginResponse(flag:))
+        if checkEmpty() {
+            alertFailure(message: "Empty email or password")
+        } else {
+            Requests.Login(username: EmailTextField.text!, password: PasswordTextField.text!, completion: self.handleLoginResponse(flag:))
+        }
     }
     
     func handleLoginResponse(flag: Bool) {
@@ -40,10 +44,25 @@ class LoginViewController: UIViewController {
         if flag {
             performSegue(withIdentifier: "LoginSuccessfull", sender: nil)
         } else {
-            //alert
-            //empty fields or invalid
+            alertFailure(message: "Invalid email or password")
         }
     }
     
+    func checkEmpty() -> Bool {
+        
+        if EmailTextField.text == "" || PasswordTextField.text == "" {
+            return true
+        }
+        return false
+    }
+    
+    func alertFailure(message: String) {
+        
+        ActivityIndicator.stopAnimating()
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (alert) in
+        }))
+        show(alertVC, sender: nil)
+    }
 }
 

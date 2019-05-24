@@ -13,6 +13,7 @@ class Requests {
     struct user {
         static var userId = ""
         static var sessionId = ""
+        static var objectId = ""
     }
     
     struct Endpoints {
@@ -59,6 +60,9 @@ class Requests {
 //                let newData = data?.subdata(in: range) /* subset response data! */
 //                let object = try! JSONDecoder().decode(ErrorResponse.self, from: newData!)
 //                print(object)
+                DispatchQueue.main.async {
+                    errorr("error")
+                }
                 print("error3")
                 return
             }
@@ -130,6 +134,7 @@ class Requests {
             completion(true)
         })
         { (error) in
+            completion(false)
             print(error)
         }
     }
@@ -160,7 +165,20 @@ class Requests {
             print(results)
             completion(results)
         }) { (error) in
-            
+            print(error)
+        }
+    }
+    
+    class func postStudentLocation(student: PostStudentLocationRequest, completion: @escaping (PostStudentLocationResponse) -> Void) {
+        
+        let body = try! JSONEncoder().encode(student)
+        
+        request(url: Endpoints.ParseBase, method: "POST", body: body, completion: { (results: PostStudentLocationResponse) in
+            print(results)
+            user.objectId = results.objectId
+            completion(results)
+        }) { (error) in
+            print(error)
         }
     }
 }

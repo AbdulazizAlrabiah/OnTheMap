@@ -20,11 +20,12 @@ class AddLocationMapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         fillAnnotation()
-        zoom()
+        zoomMap()
     }
     
     @IBAction func postLocationButton(_ sender: Any) {
         
+        postLocation()
     }
     
     func fillAnnotation() {
@@ -46,11 +47,20 @@ class AddLocationMapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(self.annotations)
     }
     
-    func zoom() {
+    func zoomMap() {
         
         let location = CLLocationCoordinate2D(latitude: student.latitude, longitude: student.longitude)
         let region = MKCoordinateRegion(center: location, latitudinalMeters: 250, longitudinalMeters: 250)
         mapView.setRegion(region, animated: true)
+    }
+    
+    func postLocation() {
+        
+        let post = PostStudentLocationRequest.init(mapString: student.mapString, mediaURL: student.mediaURL, firstName: student.firstName, lastName: student.lastName, uniqueKey: student.uniqueKey, latitude: student.latitude, longitude: student.longitude)
+        
+        Requests.postStudentLocation(student: post) { (response) in
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
