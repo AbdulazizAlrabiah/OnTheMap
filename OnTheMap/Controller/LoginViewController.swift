@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         ActivityIndicator.startAnimating()
         
         if checkEmpty() {
-            alertFailure(message: "Empty email or password")
+            alertFailure(message: StatusCodes.StatusCodes.emptyEmailOrPassword.rawValue)
         } else {
             Requests.Login(username: EmailTextField.text!, password: PasswordTextField.text!, completion: self.handleLoginResponse(flag:error:))
         }

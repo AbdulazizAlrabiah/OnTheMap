@@ -14,6 +14,10 @@ struct StatusCodes {
         case e403 = "Invalid email or password"
         case connection = "There was an error retrieving the data check your connection"
         case none = "error try again"
+        case emptyLocField = "Empty location field or website field"
+        case incorrectWebsiteType = "Enter a website that begins with https://"
+        case invalidLocation = "Enter a valid location address"
+        case emptyEmailOrPassword = "Empty email or password"
     }
     
     func handleErrors(status: Int) -> String {

@@ -25,9 +25,9 @@ class AddLocationViewController: UIViewController {
         activityIndicator.startAnimating()
 
         if checkEmpty() {
-            alertFailure(message: "Empty location field or website field")
+            alertFailure(message: StatusCodes.StatusCodes.emptyLocField.rawValue)
         } else if (websiteTextField.text?.starts(with: ("https://")))! == false {
-            alertFailure(message: "Enter a website that begins with https://")
+            alertFailure(message: StatusCodes.StatusCodes.incorrectWebsiteType.rawValue)
         }
         else {
             let location = MKLocalSearch.Request()
@@ -36,7 +36,7 @@ class AddLocationViewController: UIViewController {
             
             request.start { (response, error) in
                 guard let response = response else {
-                    self.alertFailure(message: "Enter a valid location address")
+                    self.alertFailure(message: StatusCodes.StatusCodes.invalidLocation.rawValue)
                     return }
                 let lat = response.boundingRegion.center.latitude as Double
                 let long = response.boundingRegion.center.longitude as Double

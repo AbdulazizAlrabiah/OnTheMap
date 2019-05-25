@@ -72,7 +72,7 @@ class Requests {
                         errorr(StatusCodes().handleErrors(status: object.status))
                     }
                 } catch {
-                   // errorr()
+                    errorr(error.localizedDescription)
                 }
                 return
             }
@@ -89,8 +89,7 @@ class Requests {
                     completion(object)
                 }
             } catch {
-                
-                
+                errorr(StatusCodes.StatusCodes.connection.rawValue)
             }
         }.resume()
     }

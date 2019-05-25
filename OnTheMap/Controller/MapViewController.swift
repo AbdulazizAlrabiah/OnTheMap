@@ -104,6 +104,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         let alertVC = UIAlertController(title: nil, message: error, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        show(alertVC, sender: nil)
+        showDetailViewController(alertVC, sender: nil)
     }
 }
