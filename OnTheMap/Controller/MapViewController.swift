@@ -23,8 +23,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func LogoutButtorn(_ sender: Any) {
-        Requests.Logout()
-        self.dismiss(animated: true, completion: nil)
+        
+        Requests.Logout { (flag) in
+            if flag {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                self.alertFailure(error: StatusCodes.StatusCodes.errorLoggingOut.rawValue)
+            }
+        }
     }
     
     @IBAction func RefreshButton(_ sender: Any) {

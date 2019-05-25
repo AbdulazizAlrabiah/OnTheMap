@@ -18,6 +18,7 @@ struct StatusCodes {
         case incorrectWebsiteType = "Enter a website that begins with https://"
         case invalidLocation = "Enter a valid location address"
         case emptyEmailOrPassword = "Empty email or password"
+        case errorLoggingOut = "There was an error during the log out please try again"
     }
     
     func handleErrors(status: Int) -> String {

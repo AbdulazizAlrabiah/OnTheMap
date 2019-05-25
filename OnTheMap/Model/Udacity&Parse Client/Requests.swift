@@ -131,11 +131,12 @@ class Requests {
         }
     }
     
-    class func Logout() {
+    class func Logout(completion: @escaping (Bool) -> Void) {
         
         request(url: Endpoints.UdacityBase, method: "DELETE", body: nil, completion: { (results: LogoutResponse) in
-            
+            completion(true)
         }) { (error) in
+            completion(false)
         }
     }
     
