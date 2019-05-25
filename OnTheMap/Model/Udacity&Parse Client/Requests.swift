@@ -37,7 +37,7 @@ class Requests {
         request.httpMethod = method
         
         if method == "GET" {
-            // request.url = urlWith(url: url)
+            
         } else if method == "POST" {
             request.httpBody = body
         }
@@ -93,7 +93,7 @@ class Requests {
             }
         }.resume()
     }
-    
+    //All headers for the requests
     class func headers(method: String) -> [String: String] {
         var headers: [String: String] = [:]
         headers["X-Parse-Application-Id"] = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
@@ -123,12 +123,11 @@ class Requests {
             
             user.userId = results.account.key
             user.sessionId = results.session.id
-            print(results)
+
             completion(true, nil)
         })
         { (error) in
             completion(false, error)
-            print(error)
         }
     }
     
@@ -136,9 +135,7 @@ class Requests {
         
         request(url: Endpoints.UdacityBase, method: "DELETE", body: nil, completion: { (results: LogoutResponse) in
             
-            print(results)
         }) { (error) in
-            print(error)
         }
     }
     
@@ -148,14 +145,12 @@ class Requests {
             completion(results)
         }) { (error) in
             err(error)
-            print(error)
         }
     }
     
     class func getStudentName(completion: @escaping (UserInfoResponse) -> Void, err: @escaping (String) -> Void) {
         
         request(url: Endpoints.studentInfo(), method: "GET", body: nil, completion: { (results: UserInfoResponse) in
-            print(results)
             completion(results)
         }) { (error) in
             err(error)
@@ -168,7 +163,6 @@ class Requests {
         
         request(url: Endpoints.ParseBase, method: "POST", body: body, completion: { (results: PostStudentLocationResponse) in
             
-            print(results)
             user.objectId = results.objectId
             completion(results)
         }) { (error) in

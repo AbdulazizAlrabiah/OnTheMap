@@ -14,10 +14,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var ActivityIndicator: UIActivityIndicatorView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -44,7 +40,6 @@ class LoginViewController: UIViewController {
         if flag {
             performSegue(withIdentifier: "LoginSuccessfull", sender: nil)
         } else {
-            
             alertFailure(message: error!)
         }
     }
@@ -61,10 +56,7 @@ class LoginViewController: UIViewController {
         
         ActivityIndicator.stopAnimating()
         let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (alert) in
-            
-        }))
+        alertVC.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
         show(alertVC, sender: nil)
     }
 }
-

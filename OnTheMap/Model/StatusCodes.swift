@@ -29,7 +29,6 @@ struct StatusCodes {
             return StatusCodes.none.rawValue
         }
     }
-
 }
 
 
