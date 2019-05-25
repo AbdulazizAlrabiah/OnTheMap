@@ -114,7 +114,7 @@ class Requests {
     }
     
     class func Login(username: String, password: String, completion: @escaping (Bool, String?) -> Void) {
-        print("handleing")
+        
         let account = InsideUdacity(username: username, password: password)
         let data = loginRequest(udacity: account)
         let body = try! JSONEncoder().encode(data)
